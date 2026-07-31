@@ -39,3 +39,12 @@ store.setState({ count: 1 });
 store.setState({ count: 2 });
 
 unsubscribe();
+
+const state = {
+    products: [
+        { id: 1, name: "Laptop", price: 999, image: "..." },
+        { id: 2, name: "Phone", price: 699, image: "..." },
+        { id: 3, name: "Headphones", price: 199, image: "..." }
+    ],
+    cart: []  
+};
