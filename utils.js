@@ -18,3 +18,14 @@ function getFromStorage(key, defaultValue = null) {
     const data = localStorage.getItem(key);
     return data ? JSON.parse(data) : defaultValue;
 }
+
+function getCartTotal() {
+    return state.cart.reduce((total, item) => {
+        const product = state.products.find(p => p.id === item.productId);
+        return total + (product.price * item.quantity);
+    }, 0);
+}
+
+function getCartCount() {
+    return state.cart.reduce((count, item) => count + item.quantity, 0);
+}
