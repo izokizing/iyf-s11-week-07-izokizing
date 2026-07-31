@@ -357,3 +357,61 @@ store.setState({ count: 1 });
 store.setState({ count: 2 });
 
 unsubscribe();
+
+
+const state = {
+    products: [
+        { id: 1, name: "Laptop", price: 999, image: "..." },
+        { id: 2, name: "Phone", price: 699, image: "..." },
+        { id: 3, name: "Headphones", price: 199, image: "..." }
+    ],
+    cart: []  
+};
+
+function addToCart(productId) {
+    const existing = state.cart.find(item => item.productId === productId);
+    
+    if (existing) {
+        existing.quantity++;
+    } else {
+        state.cart.push({ productId, quantity: 1 });
+    }
+    
+    saveCart();
+    renderCart();
+}
+
+function updateQuantity(productId, quantity) {
+    const item = state.cart.find(item => item.productId === productId);
+    if (!item) return;
+    if (quantity <= 0) {
+        removeFromCart(productId);
+        return;
+    }
+    item.quantity = quantity;
+
+    saveCart();
+    renderCart();
+    
+}
+
+
+
+function removeFromCart(productId) {
+    state.cart = state.cart.filter(item => item.productId !== productId);
+
+    saveCart();
+    renderCart();
+    
+}
+
+function getCartTotal() {
+    return state.cart.reduce((total, item) => {
+        const product = state.products.find(p => p.id === item.productId);
+        return total + (product.price * item.quantity);
+    }, 0);
+}
+
+function getCartCount() {
+    return state.cart.reduce((count, item) => count + item.quantity, 0);
+}
