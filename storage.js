@@ -126,3 +126,6 @@ function loadState() {
     }
 }
 
+function saveCart() {...}
+function loadCart() {...}
+
