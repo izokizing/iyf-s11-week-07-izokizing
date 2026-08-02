@@ -236,3 +236,51 @@ function getCartTotal() {
 function getCartCount() {
     return state.cart.reduce((count, item) => count + item.quantity, 0);
 }
+
+const currentDate = new Date();
+const adultUsers = users.filter(user => user.age > 18);
+function calculateDiscount(price, quantity) {
+    const DISCOUNT_RATE = 0.1;
+    return price * quantity * DISCOUNT_RATE;
+}
+
+function validateUser(userData) {
+    if (!userData.email.includes("@")) throw new Error("Invalid email");
+    if (userData.age < 18) throw new Error("Must be adult");
+    return true;
+}
+
+function normalizeUser(userData) {
+    return {
+        ...userData,
+        email: userData.email.toLowerCase(),
+        name: userData.name.trim()
+    };
+}
+
+async function createUser(userData) {
+    validateUser(userData);
+    const normalizedUser = normalizeUser(userData);
+    await database.save(normalizedUser);
+    await emailService.sendWelcome(normalizedUser.email);
+    return normalizedUser;
+}
+
+async function handleCreateUser(event) {
+    event.preventDefault();
+    try {
+        const userData = getFormData();
+        await createUser(userData);
+        showSuccess("User created!");
+    } catch (error) {
+        showError(error.message);
+    }
+}
+
+const MIN_PASSWORD_LENGTH = 8;
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+const HTTP_NOT_FOUND = 404;
+
+if (password.length < MIN_PASSWORD_LENGTH) { }
+setTimeout(callback, ONE_DAY_MS);
+if (response.status === HTTP_NOT_FOUND) { }
