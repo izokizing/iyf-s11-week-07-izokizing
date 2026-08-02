@@ -1,51 +1,6 @@
 
 
-const form = document.getElementById("contact-form");
-const inputs = form.querySelectorAll("input, textarea");
 
-inputs.forEach(input => {
-    const saved = sessionStorage.getItem(`form_${input.name}`);
-    if (saved) {
-        input.value = saved;
-    }
-
-    input.addEventListener("input", () => {
-        sessionStorage.setItem(`form_${input.name}`, input.value);
-    });
-});
-
-form.addEventListener("submit", () => {
-    inputs.forEach(input => {
-        sessionStorage.removeItem(`form_${input.name}`);
-    });
-});
-
-function getFromStorage(key, defaultValue = null) {
-    const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : defaultValue;
-}
-
-function removeFromStorage(key) {
-    localStorage.removeItem(key);
-}
-
-saveToStorage("settings", { theme: "dark", fontSize: 16 });
-const settings = getFromStorage("setting", { theme: "light", fontSize: 14 });
-
-
-
-function saveToStorage(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
-}
-
-function getFromStorage(key) {
-    const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : [];
-}
-
-function removeFromStorage(key) {
-    localStorage.removeItem(key);
-}
 
 let notes = getFromStorage("notes");
 
