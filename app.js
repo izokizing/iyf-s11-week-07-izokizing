@@ -1,29 +1,4 @@
-localStorage.setItem("username", "john");
-const username = localStorage.getItem("username");
-console.log(username);
-localStorage.removeItem("username");
-localStorage.clear();
 
-if (loadStorage.getItem("username")) {
-    console.log("User exists");
-}
-
-
-const user = {
-    name:"john",
-    age: 30,
-    hobbies: ["coding", "reading"]
-};
-
-localStorage.setItem("user", JSON.stringify(user));
-const retrieved = JSON.parse(localStorage.getItem("user"));
-console.log(retrieved);
-
-
-function saveToStorage(key, data) {
-    localStorage.setItem(key, JSON.stringify(data));
-
-}
 
 const form = document.getElementById("contact-form");
 const inputs = form.querySelectorAll("input, textarea");
