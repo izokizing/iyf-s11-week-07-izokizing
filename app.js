@@ -2,7 +2,6 @@
 
 
 
-let notes = getFromStorage("notes");
 
 function renderNotes() {
     const noteList = document.getElementById("notesList");
@@ -166,16 +165,7 @@ form.addEventListerner("submit", function (event) {
     input.value ="";
 });
 
-const STORAGE_KEY = "todos";
 
-function loadTodos() {
-    return getFromStorage(STORAGE_KEY, []);
-
-}
-
-function saveTodos(todos) {
-    seveToStorage(STORAGE_KEY, todos);
-}
 
 function addTodo(text) {
     const newTodo = {
